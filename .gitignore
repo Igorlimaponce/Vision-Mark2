@@ -1,0 +1,120 @@
+# Arquivos de Byte-compilados / otimizados / DLL
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+
+# Distribuição / empacotamento
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Logs de instalador
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Relatórios de teste unitário / cobertura
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Traduções
+*.mo
+*.pot
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Ambientes virtuais
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Logs
+logs/
+*.log
+ffmpeg.log
+
+# Docker - Manter apenas o arquivo principal de composição
+docker-compose.backup.yml
+docker-compose.gpu.yml
+docker-compose.minimal.yml
+docker-compose.test.yml
+
+# Dados e Mídia
+# Manter as pastas, mas ignorar seu conteúdo. Adicione um README.md se quiser mantê-las.
+data/
+uploads/
+
+# Backups
+backups/
+*.gz
+*.sql
+*.tar
+
+# Node.js / Frontend
+node_modules/
+frontend/node_modules/
+frontend/build/
+npm-debug.log
+yarn-error.log
+
+# Arquivos gerados pelo SO
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Diretórios e arquivos de editores
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Arquivos temporários
+temp_create_admin.py
+
+# Rostos conhecidos - pode ficar grande
+known_faces/
+frontend/public/known_faces_previews/
