@@ -1,0 +1,229 @@
+networks:
+  vision-net:
+    driver: bridge
+
+services:
+
+  mediamtx:
+    image: bluenviron/mediamtx:latest
+    container_name: mediamtx
+    volumes:
+      - ./mediamtx/mediamtx.yml:/mediamtx.yml
+    ports:
+      - "8554:8554"
+      - "1935:1935"
+      - "8888:8888"
+    networks:
+      - vision-net
+    restart: unless-stopped
+
+  database:
+    image: timescale/timescaledb-ha:pg14-all
+    container_name: vision_database
+    networks:
+      - vision-net
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      # Configurações adicionais para persistência robusta
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - vision_db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # Configurações de logging para debug
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    container_name: vision_rabbitmq
+    networks:
+      - vision-net
+    ports:
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
+    volumes:
+      - vision_rabbitmq_data:/var/lib/rabbitmq/
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api-gateway:
+    build: ./api-gateway
+    working_dir: /app/src
+    container_name: vision_api_gateway
+    networks:
+      - vision-net
+    depends_on:
+      database:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    command: ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api-gateway/src:/app/src
+      - vision_saved_media:/app/media
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DB}
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USER=${RABBITMQ_USER}
+      - RABBITMQ_PASS=${RABBITMQ_PASS}
+      - MEDIA_PATH=/app/media
+      - PYTHONPATH=/app
+    healthcheck: # <-- Adiciona a verificação de saúde
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/api/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  camera-ingestion:
+    build: ./camera-ingestion-service
+    container_name: vision_camera_ingestion
+    networks:
+      - vision-net
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      api-gateway:
+        condition: service_healthy
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USER=${RABBITMQ_USER}
+      - RABBITMQ_PASS=${RABBITMQ_PASS}
+      - API_GATEWAY_URL=http://api-gateway:8000
+      - OPENCV_FFMPEG_CAPTURE_OPTIONS=rtsp_transport;tcp
+    restart: unless-stopped
+
+  frame-processing:
+    build: ./frame-processing-service
+    container_name: vision_frame_processing
+    networks:
+      - vision-net
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      api-gateway:
+        condition: service_started
+    environment:
+      - YOLO_CONFIG_DIR=/tmp/ultralytics_config
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USER=${RABBITMQ_USER}
+      - RABBITMQ_PASS=${RABBITMQ_PASS}
+      - API_GATEWAY_URL=http://api-gateway:8000
+      - EVENTS_DB_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DB}
+      - MEDIA_PATH=/app/media
+      - NVIDIA_VISIBLE_DEVICES=all
+      - MODELS_PATH=/app/models
+    volumes:
+      - ./known_faces:/app/known_faces:ro
+      - vision_ultralytics_cache:/root/.cache
+      - vision_saved_media:/app/media
+      - vision_models_data:/app/models
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: vision_frontend
+    ports:
+      - "3000:80"
+    networks:
+      - vision-net
+    depends_on:
+      - api-gateway
+    restart: unless-stopped
+
+  # === SERVIÇOS DE AUTOMAÇÃO E MONITORAMENTO ===
+  
+  # Backup automatizado (executa diariamente às 2h)
+  backup-scheduler:
+    image: alpine:latest
+    container_name: jarvis_backup_scheduler
+    volumes:
+      - ./backups:/app/backups
+      - ./scripts:/app/scripts:ro
+      - ./logs:/app/logs
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=America/Sao_Paulo
+      - BACKUP_SCHEDULE=0 2 * * *  # Todo dia às 2h da manhã
+      - BACKUP_RETENTION_DAYS=30   # Manter backups por 30 dias
+      - DB_CONTAINER=vision_database
+      - DB_NAME=jarvis_vision
+      - DB_USER=postgres
+    command: >
+      sh -c "
+        apk add --no-cache docker-cli postgresql-client dcron &&
+        echo '0 2 * * * sh /app/scripts/automated_backup.sh >> /app/logs/cron_backup.log 2>&1' > /etc/crontabs/root &&
+        echo '0 0 * * 0 sh /app/scripts/cleanup_old_backups.sh >> /app/logs/cron_cleanup.log 2>&1' > /tmp/weekly &&
+        cat /tmp/weekly >> /etc/crontabs/root &&
+        echo 'Backup automatizado configurado para 02:00 diariamente' &&
+        crond -f -l 2
+      "
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - vision-net
+
+  # Monitor de saúde contínuo (verifica sistema a cada 5 min)
+  health-monitor:
+    image: alpine:latest
+    container_name: jarvis_health_monitor
+    volumes:
+      - ./scripts:/app/scripts:ro
+      - ./logs:/app/logs
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=America/Sao_Paulo
+      - HEALTH_CHECK_INTERVAL=300  # A cada 5 minutos
+    command: >
+      sh -c "
+        apk add --no-cache docker-cli postgresql-client &&
+        echo 'Monitor de saúde iniciado - verificações a cada 5 minutos' &&
+        ls -la /app/scripts/ &&
+        sh /app/scripts/continuous_health_check.sh
+      "
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - vision-net
+
+volumes:
+  # Volume para dados do PostgreSQL - CRÍTICO PARA PERSISTÊNCIA
+  vision_db_data:
+    driver: local
+  # Volume para dados do RabbitMQ
+  vision_rabbitmq_data:
+    driver: local
+  # Volume para mídias salvas (imagens de eventos)
+  vision_saved_media:
+    driver: local
+  # Cache do Ultralytics (modelos YOLO)
+  vision_ultralytics_cache:
+    driver: local
+  # Modelos de IA baixados
+  vision_models_data:
+    driver: local
