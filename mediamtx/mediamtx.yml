@@ -1,0 +1,13 @@
+rtspTransports: [tcp]
+
+# Endereço do servidor RTSP
+rtspAddress: :8554
+
+# --- SEÇÃO ADICIONADA ---
+# Define os caminhos de stream autorizados
+paths:
+  # O nome "stream" deve corresponder exatamente ao que você usa no comando ffmpeg
+  # (rtsp://localhost:8554/stream)
+  stream:
+    # CORREÇÃO: "publisher" indica que este caminho está aguardando uma fonte externa.
+    source: publisher
