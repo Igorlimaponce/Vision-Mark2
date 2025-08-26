@@ -1,0 +1,216 @@
+/* Layout principal do editor de pipelines */
+.pipeline-studio-layout {
+  display: flex;
+  height: calc(100vh - 60px); /* Altura total menos o cabeçalho */
+  background-color: var(--background-dark);
+}
+
+/* Barra lateral com os nós disponíveis */
+.node-sidebar {
+  width: 240px;
+  padding: 15px;
+  border-right: 1px solid var(--border-primary);
+  background-color: var(--background-primary);
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.node-sidebar h3 {
+  color: var(--accent-primary);
+  margin-top: 0;
+  border-bottom: 1px solid var(--border-primary);
+  padding-bottom: 10px;
+}
+
+.node-sidebar .description {
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.node-category {
+  margin-bottom: 20px;
+}
+
+.node-category h4 {
+  color: var(--text-primary);
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.node-item {
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: grab;
+  text-align: center;
+  font-weight: bold;
+  color: #ecf0f1;
+  transition: all 0.2s ease-in-out;
+}
+.node-item.input { background-color: var(--accent-primary); }
+.node-item.processing { background-color: #9b59b6; }
+.node-item.filter { background-color: #f39c12; }
+.node-item.action { background-color: #27ae60; }
+
+.node-item:hover {
+  transform: translateX(5px);
+  border-color: var(--accent-primary);
+}
+
+/* Wrapper principal do React Flow */
+.reactflow-wrapper {
+  flex-grow: 1;
+}
+
+/* Painel de propriedades à direita */
+.properties-panel {
+  width: 300px;
+  padding: 20px;
+  border-left: 1px solid var(--border-primary);
+  background-color: var(--background-primary);
+  overflow-y: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.properties-panel h3 {
+  color: var(--accent-primary);
+  margin-top: 0;
+  border-bottom: 1px solid var(--border-primary);
+  padding-bottom: 10px;
+}
+
+.properties-panel hr {
+  border: none;
+  border-top: 1px solid var(--border-primary);
+}
+
+/* Estilos para formulários no painel de propriedades */
+.properties-panel .pipeline-management,
+.properties-panel .node-properties {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.properties-panel input[type="text"],
+.properties-panel input[type="number"],
+.properties-panel select,
+.properties-panel textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border-primary);
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
+  box-sizing: border-box;
+}
+
+.properties-panel label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: var(--text-secondary);
+}
+
+.properties-panel .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.properties-panel small {
+    font-size: 0.8em;
+    color: var(--text-tertiary);
+    display: block;
+    margin-top: -10px;
+}
+
+/* Botões no painel de propriedades */
+.properties-panel button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.properties-panel button:active {
+    transform: scale(0.98);
+}
+
+.properties-panel .btn-save { background-color: var(--status-success); color: white; }
+.properties-panel .btn-save:hover { background-color: #30d158; }
+.properties-panel .btn-delete { background-color: var(--status-danger); color: white; }
+.properties-panel .btn-delete:hover { background-color: #ff453a; }
+.properties-panel .btn-new { background-color: var(--accent-primary); color: white; }
+.properties-panel .btn-new:hover { background-color: var(--accent-hover); }
+
+/* Estilo para o nó customizado de polígono */
+.polygon-node {
+    background: var(--background-secondary);
+    border: 2px solid var(--accent-primary);
+    border-radius: 5px;
+    padding: 15px;
+    width: 320px;
+    color: var(--text-primary);
+}
+.polygon-controls {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+.polygon-controls button {
+    flex: 1;
+    padding: 8px;
+    font-size: 0.9em;
+}
+.polygon-canvas-wrapper {
+    position: relative;
+    height: 200px;
+    background-color: var(--background-dark);
+    border: 1px dashed var(--border-primary);
+    border-radius: 4px;
+}
+.polygon-canvas {
+    width: 100%;
+    height: 100%;
+}
+.drawn-polygon {
+    fill: rgba(255, 107, 0, 0.3);
+    stroke: var(--accent-primary);
+    stroke-width: 2;
+}
+.placeholder-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-tertiary);
+    pointer-events: none;
+    font-weight: bold;
+}
+
+/* Adiciona um estilo geral aos nós do reactflow */
+.reactflow-node {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    color: white;
+    padding: 15px;
+    font-size: 12px;
+}
+
+.reactflow-node-input { border: 2px solid var(--status-success); background: var(--background-secondary); }
+.reactflow-node-default { border: 2px solid var(--accent-primary); background: var(--background-secondary); }
+.reactflow-node-output { border: 2px solid var(--status-danger); background: var(--background-secondary); }

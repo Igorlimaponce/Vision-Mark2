@@ -1,0 +1,96 @@
+/* src/components/PipelineStudio/PipelineStudio.css */
+.pipeline-studio-layout {
+  display: flex;
+  height: calc(100vh - var(--header-height));
+  background-color: var(--background-dark);
+}
+
+.reactflow-wrapper {
+  flex-grow: 1;
+}
+
+.loading-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+/* --- React Flow Overrides --- */
+
+.reactflow-node {
+    border-radius: 8px;
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    font-size: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* Espaço entre o label e os futuros controles */
+}
+
+.reactflow-node.selected {
+    border: 2px solid var(--accent-primary);
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.4);
+}
+
+.reactflow-handle {
+    background-color: var(--accent-secondary) !important;
+    border: 2px solid var(--background-primary) !important;
+    width: 10px !important;
+    height: 10px !important;
+}
+
+/* --- Estilos para Edição Inline (a serem usados no futuro) --- */
+
+.node-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.node-input {
+    width: 90%;
+    padding: 6px;
+    border: 1px solid var(--border-primary);
+    border-radius: 4px;
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.node-select {
+    width: 90%;
+    padding: 6px;
+    border: 1px solid var(--border-primary);
+    border-radius: 4px;
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.node-config-button {
+    background-color: var(--background-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+}
+
+.node-config-button:hover {
+    background-color: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}

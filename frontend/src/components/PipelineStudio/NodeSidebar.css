@@ -1,0 +1,81 @@
+/* frontend/src/components/PipelineStudio/NodeSidebar.css */
+.node-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  background-color: var(--background-primary);
+  border-right: 1px solid var(--border-primary);
+  padding: 20px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.node-sidebar h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  color: var(--text-primary);
+}
+
+.node-sidebar .description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.node-category {
+  margin-bottom: 25px;
+}
+
+.node-category h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--border-primary);
+  padding-bottom: 8px;
+}
+
+.node-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  cursor: grab;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
+  transition: all 0.2s ease-in-out;
+}
+
+.node-item:hover {
+  border-color: var(--accent-primary);
+  background-color: var(--background-tertiary);
+  transform: translateX(5px);
+}
+
+.node-item:active {
+  cursor: grabbing;
+  background-color: var(--accent-primary);
+  color: white;
+}
+
+.node-item svg {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.node-item.input svg { color: var(--accent-primary); }
+.node-item.processing svg { color: #9b59b6; }
+.node-item.filter svg { color: #f1c40f; }
+.node-item.analysis svg { color: #e74c3c; }
+.node-item.facial svg { color: #3498db; }
+.node-item.action svg { color: #2ecc71; }
+
+.node-item span {
+  font-weight: 500;
+}

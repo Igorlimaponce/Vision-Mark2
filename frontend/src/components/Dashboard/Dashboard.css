@@ -1,0 +1,35 @@
+/* src/components/Dashboard/Dashboard.css */
+.dashboard-container {
+  padding: 30px;
+}
+
+.dashboard-header {
+  margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+  color: var(--text-primary);
+}
+
+.dashboard-header p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 25px;
+}
+
+.error-message {
+    color: var(--status-danger);
+    background-color: rgba(229, 75, 75, 0.1);
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid var(--status-danger);
+}

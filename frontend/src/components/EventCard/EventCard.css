@@ -1,0 +1,77 @@
+/* src/components/EventCard/EventCard.css */
+.event-card {
+  background-color: var(--background-primary);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-primary);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.event-image-wrapper {
+  width: 100%;
+  padding-top: 75%; /* Aspect ratio 4:3 */
+  position: relative;
+  background-color: var(--background-dark);
+}
+
+.event-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.event-type, .event-camera {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 15px;
+}
+
+.event-type {
+    background-color: var(--accent-primary);
+    color: white;
+    font-weight: 500;
+}
+
+.event-message {
+  color: var(--text-primary);
+  margin: 0 0 15px 0;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.event-footer {
+  text-align: right;
+}
+
+.event-timestamp {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}

@@ -1,0 +1,502 @@
+/* CustomNodes.css: Estilos para os componentes de nó customizados */
+
+.custom-node {
+    border-radius: 8px;
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    width: 300px;
+    font-size: 0.9rem;
+}
+
+.custom-node.selected {
+    border: 2px solid var(--accent-primary);
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.4);
+}
+
+.node-header {
+    background-color: var(--accent-primary); /* Cor laranja do Apple Watch Ultra */
+    color: white;
+    padding: 8px 12px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.node-title {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.node-title svg {
+    width: 16px;
+    height: 16px;
+}
+
+.node-subtitle {
+    font-size: 0.8em;
+    opacity: 0.8;
+}
+
+.node-header-actions button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.1em;
+    padding: 2px;
+}
+.node-header-actions button:hover {
+    opacity: 0.8;
+}
+
+.node-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaçamento entre os campos do formulário */
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.85em;
+}
+
+.form-row input[type="text"],
+.form-row input[type="number"],
+.form-row select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--border-primary);
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    font-size: 0.9em;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.form-row input:focus,
+.form-row select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background-color: var(--background-primary);
+}
+
+.form-row-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+}
+.form-row-checkbox input {
+    width: 16px;
+    height: 16px;
+}
+
+.node-config-button {
+    width: 100%;
+    background-color: var(--background-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.node-config-button:hover {
+    background-color: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+/* Styling for node information sections */
+.node-info {
+    background-color: var(--background-tertiary);
+    border: 1px solid var(--border-primary);
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+.node-info small {
+    color: var(--text-secondary);
+    font-size: 0.8em;
+    line-height: 1.4;
+    display: block;
+}
+
+/* Enhanced styling for trajectory analysis node */
+.form-row small {
+    color: var(--text-secondary);
+    font-size: 0.75em;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+/* Node header variations for different categories */
+.node-header.analysis {
+    background-color: #e74c3c;
+}
+
+.node-header.filter {
+    background-color: #f1c40f;
+}
+
+.node-header.facial {
+    background-color: #3498db;
+}
+
+.node-header.action {
+    background-color: #2ecc71;
+}
+
+/* Advanced Node Features - Form Sections */
+.form-section {
+    border: 1px solid var(--border-primary);
+    border-radius: 6px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background-color: var(--background-secondary);
+}
+
+.section-header {
+    background-color: var(--background-tertiary);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-primary);
+    font-weight: 600;
+    font-size: 0.85em;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.section-header svg {
+    width: 14px;
+    height: 14px;
+}
+
+.form-section .form-row {
+    margin: 12px;
+}
+
+.form-section .form-row:last-child {
+    margin-bottom: 12px;
+}
+
+.form-section .form-row-checkbox {
+    margin: 12px;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7em;
+    font-weight: 600;
+    margin-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.status-active {
+    background-color: #27ae60;
+    color: white;
+}
+
+.status-badge.status-inactive {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.status-badge.status-warning {
+    background-color: #f39c12;
+    color: white;
+}
+
+.status-badge.status-info {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Real-time Metrics */
+.node-metrics {
+    background-color: var(--background-tertiary);
+    border: 1px solid var(--border-primary);
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 0.8em;
+}
+
+.metric:last-child {
+    margin-bottom: 0;
+}
+
+.metric-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.metric-value {
+    color: var(--text-primary);
+    font-weight: 600;
+    background-color: var(--background-primary);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--border-primary);
+}
+
+/* Enhanced Form Elements */
+.form-row input[type="password"],
+.form-row input[type="email"],
+.form-row input[type="url"],
+.form-row input[type="tel"],
+.form-row input[type="time"],
+.form-row textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--border-primary);
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    font-size: 0.9em;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+    resize: vertical;
+}
+
+.form-row textarea {
+    min-height: 60px;
+    font-family: inherit;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background-color: var(--background-primary);
+    box-shadow: 0 0 0 2px rgba(0, 170, 255, 0.1);
+}
+
+/* Priority and Alert Level Styling */
+.alert-level {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    font-weight: 600;
+    margin-left: 6px;
+}
+
+.alert-level.low {
+    background-color: #27ae60;
+    color: white;
+}
+
+.alert-level.medium {
+    background-color: #f39c12;
+    color: white;
+}
+
+.alert-level.high {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.alert-level.critical {
+    background-color: #8e44ad;
+    color: white;
+}
+
+/* Disabled Form Elements */
+.form-row input:disabled,
+.form-row select:disabled,
+.form-row textarea:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--background-tertiary);
+}
+
+/* Enhanced Node Headers */
+.node-title {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.node-title svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* DeepSORT specific styling */
+.tracker-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.tracker-status .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #27ae60;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(39, 174, 96, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(39, 174, 96, 0);
+    }
+}
+
+/* Enhanced status badges and info styling */
+.status-badge.active {
+    background-color: #27ae60;
+    color: white;
+}
+
+.status-badge.inactive {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Info items for node summaries */
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 0.8em;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.info-value {
+    color: var(--text-primary);
+    font-weight: 600;
+    background-color: var(--background-primary);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--border-primary);
+}
+
+/* Range input styling */
+.form-row input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background-color: var(--background-tertiary);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.form-row input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--accent-primary);
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.form-row input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--accent-primary);
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Advanced tracking and re-id styling */
+.deepsort-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.deepsort-status .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #27ae60;
+    animation: pulse 2s infinite;
+}
+
+/* Small text styling */
+.form-row small {
+    color: var(--text-secondary);
+    font-size: 0.75em;
+    margin-top: 4px;
+    font-style: italic;
+    display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .custom-node {
+        width: 280px;
+    }
+    
+    .node-content {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .form-section .form-row {
+        margin: 10px;
+    }
+}

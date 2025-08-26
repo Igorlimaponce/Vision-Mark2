@@ -1,0 +1,272 @@
+/* frontend/src/components/Auth/UserProfile.css */
+.profile-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 20px;
+}
+
+.profile-card {
+  background: var(--background-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.profile-header {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 2rem;
+}
+
+.profile-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.profile-form {
+  padding: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--border-primary);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
+}
+
+.form-group input:disabled {
+  background-color: var(--background-tertiary);
+  cursor: not-allowed;
+}
+
+.readonly-field {
+  background-color: var(--background-tertiary) !important;
+  color: var(--text-tertiary) !important;
+}
+
+.role-display {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.role-display small {
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-primary);
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.button-group button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.edit-button {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.edit-button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.save-button {
+  background: var(--status-success);
+  color: white;
+}
+
+.save-button:hover:not(:disabled) {
+  background: #30d158;
+  transform: translateY(-1px);
+}
+
+.cancel-button {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background: #cbd5e0;
+}
+
+.logout-button {
+  background: #e53e3e;
+  color: white;
+}
+
+.logout-button:hover {
+  background: #c53030;
+  transform: translateY(-1px);
+}
+
+.button-group button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.message {
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.message.success {
+  background-color: #f0fff4;
+  color: #2f855a;
+  border: 1px solid #9ae6b4;
+}
+
+.message.error {
+  background-color: #fee;
+  color: #c53030;
+  border: 1px solid #fed7d7;
+}
+
+.profile-error {
+  text-align: center;
+  padding: 2rem;
+  color: #e53e3e;
+}
+
+.profile-error i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: #666;
+}
+
+.spinner {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.access-denied-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 2rem;
+}
+
+.access-denied-content {
+  text-align: center;
+  max-width: 400px;
+}
+
+.access-denied-content i {
+  font-size: 4rem;
+  color: #e53e3e;
+  margin-bottom: 1rem;
+}
+
+.access-denied-content h2 {
+  margin-bottom: 1rem;
+  color: #2d3748;
+}
+
+.access-denied-content p {
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .profile-container {
+    margin: 1rem;
+    padding: 10px;
+  }
+  
+  .profile-form {
+    padding: 1.5rem;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .button-group button {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,202 @@
+/* CameraManager.css */
+.camera-manager-container {
+    padding: 30px;
+    color: var(--text-primary);
+}
+
+.manager-header {
+    margin-bottom: 40px;
+}
+
+.manager-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+}
+
+.manager-header p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.manager-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+}
+
+.camera-list-section h2,
+.add-camera-section h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.camera-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.camera-item {
+    background-color: var(--background-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+.camera-item:hover {
+    background-color: var(--background-secondary);
+}
+
+.camera-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.camera-icon {
+    font-size: 1.8rem;
+    color: var(--accent-primary);
+}
+
+.camera-name {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.camera-url {
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.delete-button {
+    background: none;
+    border: 1px solid transparent;
+    color: var(--text-secondary);
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+.delete-button:hover {
+    color: var(--status-danger);
+    background-color: rgba(229, 75, 75, 0.1);
+    border-color: var(--status-danger);
+}
+
+.add-camera-form .form-group {
+    margin-bottom: 20px;
+}
+
+.add-camera-form label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}
+
+.input-with-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-with-button input {
+    flex-grow: 1;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-primary);
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    box-sizing: border-box;
+}
+
+.test-button {
+    padding: 10px 15px;
+    border: 1px solid var(--border-primary);
+    background-color: var(--background-tertiary);
+    color: var(--text-primary);
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.test-button:hover:not(:disabled) {
+    background-color: var(--background-secondary);
+}
+.test-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.status-icon {
+    font-size: 1.4rem;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.spin-icon {
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.status-icon.success {
+    color: var(--status-success);
+}
+.status-icon.error {
+    color: var(--status-danger);
+}
+
+.status-message {
+    font-size: 0.85rem;
+    margin-top: 8px;
+    animation: fadeIn 0.3s;
+}
+.status-message.success {
+    color: var(--status-success);
+}
+.status-message.error {
+    color: var(--status-danger);
+}
+
+
+.add-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--accent-primary);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+.add-button:hover {
+    background-color: #0095e0;
+}
