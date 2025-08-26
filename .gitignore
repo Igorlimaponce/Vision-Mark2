@@ -84,7 +84,6 @@ uploads/
 # Backups
 backups/
 *.gz
-*.sql
 *.tar
 
 # Node.js / Frontend
