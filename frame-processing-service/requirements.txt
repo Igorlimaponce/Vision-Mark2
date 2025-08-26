@@ -1,0 +1,21 @@
+pika
+opencv-python-headless
+numpy
+requests
+psycopg2-binary
+scipy
+ultralytics
+# BIBLIOTECAS PARA RECONHECIMENTO FACIAL
+retina-face
+deepface
+httpx
+# BIBLIOTECAS AVANÇADAS PARA RASTREAMENTO DEEPSORT
+torch
+torchvision
+torchaudio
+filterpy
+scikit-learn
+tensorboard
+easydict
+yacs
+Cython
